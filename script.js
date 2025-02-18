@@ -3,8 +3,22 @@ window.addEventListener("load", () => {
 
     const box = document.createElement("div");
     box.classList.add("box");
+    const row = document.createElement("div");
+    row.classList.add("row");
 
+    // Set number of columns
     for (let i = 0; i < 16; i++) {
-        gridContainer.cloneNode(box);
+        row.appendChild(box.cloneNode());
     }
+
+    // Set number of rows
+    for (let i = 0; i < 16; i++) {
+        gridContainer.appendChild(row.cloneNode(true));
+    }
+
+    gridContainer.addEventListener("mouseenter", (event) => {
+        if (event.target.classList.contains("box")) {
+            event.target.setAttribute("style", "background-color: red;");
+        }
+    });
 });
