@@ -16,9 +16,11 @@ window.addEventListener("load", () => {
         gridContainer.appendChild(row.cloneNode(true));
     }
 
-    gridContainer.addEventListener("mouseenter", (event) => {
-        if (event.target.classList.contains("box")) {
-            event.target.setAttribute("style", "background-color: red;");
-        }
+    gridContainer.addEventListener("mouseover", (event) => {
+    if (event.target.classList.contains("box")) {
+        event.target.style.backgroundColor = "red";
+    }
     });
+
+
 });
