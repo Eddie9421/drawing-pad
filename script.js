@@ -1,11 +1,18 @@
 const MAXIMUM_NUMBER_OF_SQUARES = 100;
 
+function getRandomColorValue() {
+    return Math.round(Math.random() * 255);    
+}
+
 function createGrid(squares) {
     const gridContainer = document.querySelector(".container");
+
+    // Delete any old grids.
     gridContainer.replaceChildren();
 
     const box = document.createElement("div");
     box.classList.add("box");
+    box.setAttribute("style", `background: rgba(0, 0, 0, 0);`);
     const row = document.createElement("div");
     row.classList.add("row");
 
@@ -19,17 +26,18 @@ function createGrid(squares) {
         gridContainer.appendChild(row.cloneNode(true));
     }
     
-
-
     gridContainer.addEventListener("mouseover", (event) => {
     if (event.target.classList.contains("box")) {
-        event.target.style.backgroundColor = "red";
-    }
+        const tempArr = event.target.style.background.split(",");
+        // Alpha value is the number after the last comma.
+        let oldAlphaValue = parseFloat(tempArr[tempArr.length - 1]);
+        oldAlphaValue += 0.1;
+        event.target.setAttribute("style", `background: rgba(${getRandomColorValue()}, ${getRandomColorValue()}, ${getRandomColorValue()}, ${oldAlphaValue});`);
+    }   
     });
 }
 
 window.addEventListener("load", () => {
-    
     const gridChangerButton = document.querySelector(".grid-changer-button");
 
     gridChangerButton.addEventListener("click", () => {
